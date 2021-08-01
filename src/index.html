@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-  <title>example-env</title>
+  <title>Weather</title>
 </head>
-<body>
-  <h3>Enter three lengths to determine if they can make a triangle.</h3>
-  <form id="triangle-checker-form">
-    <label for="length1">Enter a number:</label>
-    <input id="length1" type="number">
-    <label for="length2">Enter a number:</label>
-    <input id="length2" type="number">
-    <label for="length3">Enter a number:</label>
-    <input id="length3" type="number">
-    <button type="submit">Submit</button>
-  </form>
-  <ul id="response"></ul>
+<div class="container">
+  <h1>Get Weather Conditions From Anywhere!</h1>
+  <label for="location">Enter a location:</label>
+  <input id="location" type="text">
+  <button class="btn-success" id="weatherLocation">Get Current Temperature and Humidity</button>
+  <div class="showErrors"></div>
+  <div class="showHumidity"></div>
+  <div class="showTemp"></div>
+</div>
 </body>
 </html>
