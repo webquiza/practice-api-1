@@ -3,29 +3,38 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 
-$(document).ready(function() {
-  $('#weatherLocation').click(function() {
-    const city = $('#location').val();
-    $('#location').val("");
+// document.ready function is not needed
 
-    let request = new XMLHttpRequest();
-    const url = `http://api.openweathermap.org/data/2.5/weather?q=portland,oregon&appid=${process.env.API_KEY}`;
+//$(document).ready(function() {
 
-    request.onreadystatechange = function() {
-      if (this.readyState === 4 && this.status === 200) {
-        // debugger;
-        const response = JSON.parse(this.responseText);
-        getElements(response);
-      }
-    };
+$('#weatherLocation').click(function() {
+  const zipCode = $('#zipCode').val();
+  //const state = $('#state').val();
+  $('#zipCode').val("");
+  //$('#state').val("");
 
-    request.open("GET", url, true);
-    request.send();
+  let request = new XMLHttpRequest();
+  const url = `http://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&units=imperial&appid=${process.env.API_KEY}`;
 
-   function getElements(response) {
-      $('.showHumidity').text(`The humidity in ${city} is ${response.main.humidity}%`);
-      $('.showTemp').text(`The temperature in Kelvins is ${response.main.temp} degrees.`);
+  request.onreadystatechange = function() {
+    if (this.readyState === 4 && this.status === 200) {
+      // debugger;
+      const response = JSON.parse(this.responseText);
+      getElements(response);
     }
-  });
+  };
+
+  request.open("GET", url, true);
+  request.send();
+
+  function getElements(response) {
+    $('.showTemp').text(`The temperature in ${zipCode} is ${response.main.temp} degrees fahrenheit.`);
+
+    //Example with zip code and state
+    
+    //$('.showTemp').text(`The temperature in ${zipCode}, ${state} is ${response.main.temp} degrees fahrenheit.`);
+  }
+  //});
+
 });
 
