@@ -28,7 +28,7 @@ $('#weatherLocation').click(function() {
   request.send();
 
   function getElements(response) {
-    $('.showTemp').text(`The temperature in ${zipCode} is ${response.main.temp} degrees fahrenheit.`);
+    $('.showTemp').text(`The temperature in ${zipCode} is ${response.main.temp} °F`);
 
     //Example with zip code and state
     

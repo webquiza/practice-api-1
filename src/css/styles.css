@@ -2,3 +2,11 @@ body {
   background-color: lightblue;
 }
 
+.center {
+  text-align: center;
+}
+
+h1, .temp {
+  padding: 20px;
+}
+
