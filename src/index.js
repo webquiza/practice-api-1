@@ -18,15 +18,17 @@ function getElements(response) {
   }
 }
 
+async function makeApiCall(zipCode) {
+  const response = await WeatherService.getWeather(zipCode);
+  getElements(response);
+}
+
 $('#weatherLocation').click(function() {
   let zipCode = $('#zipCode').val();
   clearFields();
-  WeatherService.getWeather(zipCode)
-    .then(function(response) {
-      getElements(response);
-    });
-
+  makeApiCall(zipCode);
 });
+
 
   
 
