@@ -2,7 +2,7 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-import WeatherService from './weather-service';
+import WeatherService from './weather-service.js';
 
 function clearFields() {
   $('#zipCode').val("");
@@ -10,25 +10,23 @@ function clearFields() {
   $('.showTemp').text("");
 }
 
+function getElements(response) {
+  if (response.main) {
+    $('.showTemp').text(`The temperature in ${response.name} is ${response.main.temp} °F`);
+  } else {
+    $('.showErrors').text(`There was an error: ${response.message}`);
+  }
+}
 
 $('#weatherLocation').click(function() {
   let zipCode = $('#zipCode').val();
   clearFields();
+  WeatherService.getWeather(zipCode)
+    .then(function(response) {
+      getElements(response);
+    });
 
-  let promise = WeatherService.getWeather(zipCode);
-
-  promise.then(function(response) {
-
-    const body = JSON.parse(response);
-    $('.showTemp').text(`The temperature in ${zipCode} is ${body.main.temp} °F`);
-    $('.showErrors').text("");
-
-  }, function(error) {
-
-    $('.showErrors').text(`There was an error processing your request: ${error}`);
-    $('.showTemp').text("");
-
-  });
 });
+
   
 
